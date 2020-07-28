@@ -42,4 +42,18 @@ class LinkedListTest < Minitest::Test
     assert_equal 'The West family', list.to_string
   end
 
+  def test_it_can_handle_multiple_elements
+    list = LinkedList.new
+
+    assert_nil list.head
+    list.append('Rhodes')
+    assert_equal 'Rhodes', list.head.surname
+    assert_nil list.head.next_node
+
+    list.append('Hardy')
+    assert_equal 'Hardy', list.head.next_node.surname
+    assert_equal 2, list.count
+    assert_equal "The Rhodes family, followed by the Hardy family", list.to_string
+  end
+
 end

@@ -1,6 +1,6 @@
 class Node
-  attr_reader :surname,
-              :next_node
+  attr_reader :surname
+  attr_accessor :next_node
 
   def initialize(surname, next_node=nil)
     @surname = surname
@@ -16,11 +16,24 @@ class LinkedList
   end
 
   def append(name)
-    @head = Node.new(name)
+    if @head
+      @head.next_node = Node.new(name)
+    else
+      @head = Node.new(name)
+    end
   end
 
   def count
-    1
+    counter = 0
+    if @head
+      counter = 1
+      node = head.next_node
+      until node == nil do
+        node = node.next_node
+        counter += 1
+      end
+    end
+    counter
   end
 
   def to_string
